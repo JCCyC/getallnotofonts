@@ -54,4 +54,6 @@ This puts the fonts in `/usr/local/share/fonts/notofonts`, which must not exist 
 
 ## License
 
+The script is licensed under the [GNU General Public License v3.0 or later](LICENSE).
+
 The Noto fonts are licensed under the [SIL Open Font License 1.1](https://openfontlicense.org/). This repository contains only the download script, not the fonts.
