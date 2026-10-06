@@ -1,0 +1,15 @@
+# Font output, in case the script is run with a destination inside the repo
+*.ttf
+*.ttc
+*.otf
+*.otc
+
+# Editor and OS files
+.vscode/
+.idea/
+*.swp
+*~
+.DS_Store
+
+# Claude Code local settings
+.claude/settings.local.json
