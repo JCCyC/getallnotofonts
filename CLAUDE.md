@@ -21,6 +21,12 @@ The repository is one Bash script, `getallnotofonts.sh`. It sparse-clones three 
 - Quote all variables. Use `find -print0` with `read -d ''` for file lists.
 - Errors go to stderr. Progress goes to stdout (`Cloning ...`, `copied N file(s)`).
 - Keep the script dependent only on Bash, Git and coreutils/findutils.
+- The upstream repositories change their layout over time, so don't rely on remembered paths. Before changing or questioning a path in the script, check the live repository. Listing its files is enough:
+
+  ```bash
+  git clone --depth 1 --filter=blob:none --no-checkout <url> <tmp-dir>
+  git -C <tmp-dir> ls-tree -r --name-only HEAD | grep <pattern>
+  ```
 
 ## Testing
 
