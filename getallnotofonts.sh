@@ -2,16 +2,40 @@
 # Collect Noto fonts (TrueType fonts / collections) from the upstream repos into one directory.
 #
 # Usage: getallnotofonts.sh <dest>
+#        getallnotofonts.sh --system
 #   <dest> must not already exist; it will be created.
+#   --system installs into /usr/local/share/fonts/notofonts (must not exist;
+#   /usr/local/share/fonts must exist). Requires root.
 
 set -euo pipefail
 
-if [[ $# -ne 1 ]]; then
+system_fonts_dir=/usr/local/share/fonts
+
+usage() {
     echo "Usage: $(basename "$0") <dest>" >&2
+    echo "       $(basename "$0") --system" >&2
     exit 1
+}
+
+if [[ $# -ne 1 ]]; then
+    usage
 fi
 
-dest=$1
+if [[ $1 == --system ]]; then
+    if [[ $EUID -ne 0 ]]; then
+        echo "Error: --system must be run as root" >&2
+        exit 1
+    fi
+    if [[ ! -d "$system_fonts_dir" ]]; then
+        echo "Error: '$system_fonts_dir' does not exist" >&2
+        exit 1
+    fi
+    dest=$system_fonts_dir/notofonts
+elif [[ $1 == -* ]]; then
+    usage
+else
+    dest=$1
+fi
 
 if [[ -e "$dest" ]]; then
     echo "Error: '$dest' already exists" >&2

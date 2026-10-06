@@ -23,6 +23,7 @@ The script takes hinted fonts first and uses unhinted ones only where no hinted 
 
 ```bash
 ./getallnotofonts.sh <dest>
+./getallnotofonts.sh --system
 ```
 
 `<dest>` must not exist yet; the script creates it. Example:
@@ -41,6 +42,15 @@ To make the fonts available to your user on Linux:
 ./getallnotofonts.sh ~/.local/share/fonts/noto
 fc-cache -f
 ```
+
+To install them for all users, run the script as root with `--system` instead of a path:
+
+```bash
+sudo ./getallnotofonts.sh --system
+sudo fc-cache -f
+```
+
+This puts the fonts in `/usr/local/share/fonts/notofonts`, which must not exist yet. `/usr/local/share/fonts` must already exist.
 
 ## License
 
